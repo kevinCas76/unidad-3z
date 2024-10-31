@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parámetros
+lambda_llegada = 1 / 15  # Tasa de llegadas (1 llegada cada 15 minutos)
+tiempo_operacion = 720  # Duración de la operación en minutos (12 horas)
+
+# Generación de tiempos entre llegadas usando distribución exponencial
+tiempos_entre_llegadas = []
+tiempo_total = 0
+
+while tiempo_total < tiempo_operacion:
+    tiempo_llegada = np.random.exponential(1 / lambda_llegada)
+    tiempo_total += tiempo_llegada
+    if tiempo_total < tiempo_operacion:
+        tiempos_entre_llegadas.append(tiempo_llegada)
+
+# Resultados
+print("Tiempos entre llegadas de vehículos (en minutos):", tiempos_entre_llegadas)
+print("Número de vehículos llegados:", len(tiempos_entre_llegadas))
+
+# Gráfica
+plt.figure(figsize=(10, 6))
+plt.hist(tiempos_entre_llegadas, bins=30, color='skyblue', edgecolor='black')
+plt.xlabel('Tiempo entre llegadas (minutos)')
+plt.ylabel('Frecuencia')
+plt.title('Distribución de Tiempos entre Llegadas de Vehículos')
+plt.show()
