@@ -1,0 +1,25 @@
+import numpy as np
+from scipy.stats import binom
+import matplotlib.pyplot as plt
+
+# Parámetros
+n = 20  # Número de pedidos diarios
+p = 0.7  # Probabilidad de éxito
+dias = 7  # Número de días en una semana
+
+# Generación de variables aleatorias usando la distribución binomial
+pedidos_satisfechos = binom.rvs(n, p, size=dias)
+
+# Resultados
+print("Pedidos satisfechos por día durante una semana:", pedidos_satisfechos)
+print("Promedio de pedidos satisfechos:", np.mean(pedidos_satisfechos))
+
+# Gráfica
+plt.figure(figsize=(10, 6))
+plt.bar(range(1, dias + 1), pedidos_satisfechos, color='skyblue', edgecolor='black')
+plt.xlabel('Día de la semana')
+plt.ylabel('Pedidos satisfechos')
+plt.title('Pedidos Satisfechos por Día durante una Semana')
+plt.xticks(range(1, dias + 1))
+plt.ylim(0, n)  # Límite del eje y hasta el máximo de pedidos
+plt.show()
