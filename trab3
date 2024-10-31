@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parámetros conocidos
+esperanza = 10  # Promedio de espera en minutos
+desviacion = 2  # Desviación estándar de espera en minutos
+clientes = 50  # Número de clientes
+
+# Cálculo de mu y sigma de la distribución normal subyacente
+mu = np.log(esperanza**2 / np.sqrt(desviacion**2 + esperanza**2))
+sigma = np.sqrt(np.log(1 + (desviacion**2 / esperanza**2)))
+
+# Generación de tiempos de espera usando la distribución lognormal
+tiempos_espera = np.random.lognormal(mean=mu, sigma=sigma, size=clientes)
+
+# Resultados
+print("Tiempos de espera (en minutos) para 50 clientes:", tiempos_espera)
+print("Promedio simulado de espera:", np.mean(tiempos_espera))
+print("Desviación estándar simulada de espera:", np.std(tiempos_espera))
+
+# Gráfica de los tiempos de espera
+plt.figure(figsize=(10, 6))
+plt.hist(tiempos_espera, bins=20, color='lightgreen', edgecolor='black')
+plt.xlabel('Tiempo de espera (minutos)')
+plt.ylabel('Frecuencia')
+plt.title('Distribución de Tiempos de Espera para Clientes en Servicio Técnico')
+plt.show()
